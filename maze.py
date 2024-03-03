@@ -11,12 +11,13 @@ FPS = 120
 font1 = font.SysFont("ProtestRevolution-Regular.ttf", 40)
 font2 = font.SysFont("ProtestRevolution-Regular.ttf", 55)
 
-mixer.music.load("jungles.ogg") 
-mixer.music.set_volume(0.2)
+mixer.music.load("ObservingTheStar.ogg")
+mixer.music.set_volume(0.4)
 mixer.music.play(loops=-1)
 
 kick_sound = mixer.Sound('kick.ogg')
 kick_sound.play()
+win_sound = mixer.Sound('snare.wav')
 
 window = display.set_mode((WIDTH, HEIGHT)) #створюємо вікно 
 display.set_caption("Maze")
@@ -31,7 +32,7 @@ playerW_img = image.load('spaceman_W.png')
 playerL_img = image.load('spaceman_L.png')
 enemy_img = image.load('blue_flare-removebg-preview.png')
 wall_img = image.load('metalbox_normal.png')
-treasure_img = image.load('treasure.png')
+treasure_img = image.load('teleport_256 (1).png')
 
 sprites = sprite.Group()
 
@@ -160,10 +161,12 @@ while True:
         enemys.update()
     if player.hp <= 0:
         finish = True
-    
+        
+
     if sprite.collide_rect(player, treasure):
         finish = True
         finish_text = font2.render("You win!", True, (255, 0, 0))
+        win_sound.play()
 
     window.blit(bg, (0,0))
     sprites.draw(window)
